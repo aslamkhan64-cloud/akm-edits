@@ -1,1 +1,444 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKM EDITS | Admin Panel</title>
+
+<style>
+:root {
+  --gold: #ffd700;
+  --red: #ff3333;
+  --black: #0b0b0b;
+  --panel: #171717;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 20px;
+  background: var(--black);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.container {
+  max-width: 750px;
+  margin: auto;
+}
+h1, h2 { color: var(--gold); }
+.panel {
+  background: var(--panel);
+  padding: 18px;
+  border-radius: 12px;
+  margin: 18px 0;
+  border: 1px solid #333;
+}
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0 14px;
+  border-radius: 7px;
+  border: 1px solid #555;
+  background: #090909;
+  color: white;
+  font-size: 16px;
+}
+textarea { min-height: 120px; resize: vertical; }
+button, .link-button {
+  display: inline-block;
+  border: 0;
+  padding: 11px 16px;
+  margin: 5px 4px 5px 0;
+  border-radius: 7px;
+  background: var(--gold);
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+button.danger { background: var(--red); color: white; }
+button.secondary { background: #444; color: white; }
+.post {
+  border: 1px solid #444;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+.post img {
+  max-width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  display: block;
+  margin: 10px 0;
+}
+.small { color: #bbb; font-size: 13px; }
+#message { white-space: pre-wrap; overflow-wrap: anywhere; }
+.hidden { display: none !important; }
+a { color: var(--gold); }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>AKM EDITS — Admin Panel</h1>
+  <p>Manage your website posts here.</p>
+  <p><a href="./index.html">← Open Public Website</a></p>
+
+  <div id="message" role="status"></div>
+
+  <section id="loginPanel" class="panel">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username"
+             placeholder="Enter your admin email" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password"
+             placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <section id="adminPanel" class="hidden">
+    <div class="panel">
+      <h2 id="formHeading">Add New Post</h2>
+
+      <form id="postForm">
+        <label for="title">Post Title</label>
+        <input id="title" maxlength="200" required
+               placeholder="Enter post title">
+
+        <label for="content">Post Description</label>
+        <textarea id="content" required
+                  placeholder="Write your post here"></textarea>
+
+        <label for="postUrl">Post Link (optional)</label>
+        <input id="postUrl" type="url"
+               placeholder="https://example.com">
+
+        <label for="imageFile">Post Image (optional)</label>
+        <input id="imageFile" type="file" accept="image/*">
+        <p class="small">Maximum image size: 5 MB.</p>
+
+        <button id="saveButton" type="submit">Publish Post</button>
+        <button id="cancelButton" class="secondary hidden"
+                type="button">Cancel Edit</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>Latest Posts</h2>
+      <button id="refreshButton" type="button">Refresh Posts</button>
+      <button id="logoutButton" class="danger" type="button">Logout</button>
+      <div id="postsList"></div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://klvgqdzwjadigjdeowml.supabase.co";
+const SUPABASE_KEY = "sb_publishable_IuBR3NBb4rUP9g7Oj_Kskg_y_-kZRg3";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const $ = id => document.getElementById(id);
+
+let editingId = null;
+let existingImageUrl = "";
+
+function showMessage(message) {
+  $("message").textContent = message || "";
+}
+
+function showLogin() {
+  $("loginPanel").classList.remove("hidden");
+  $("adminPanel").classList.add("hidden");
+}
+
+function showAdmin() {
+  $("loginPanel").classList.add("hidden");
+  $("adminPanel").classList.remove("hidden");
+}
+
+function resetPostForm() {
+  editingId = null;
+  existingImageUrl = "";
+  $("postForm").reset();
+  $("formHeading").textContent = "Add New Post";
+  $("saveButton").textContent = "Publish Post";
+  $("cancelButton").classList.add("hidden");
+}
+
+async function checkAdmin() {
+  const { data: { session }, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error || !session) {
+    showLogin();
+    return false;
+  }
+
+  const { data, error: adminError } =
+    await supabaseClient.rpc("is_site_admin");
+
+  if (adminError || data !== true) {
+    await supabaseClient.auth.signOut();
+    showLogin();
+    showMessage(
+      "Admin access denied. Please check that this account has admin permission."
+    );
+    return false;
+  }
+
+  showAdmin();
+  return true;
+}
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  showMessage("Logging in...");
+
+  const email = $("email").value.trim();
+  const password = $("password").value;
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    showMessage("Login failed: " + error.message);
+    return;
+  }
+
+  const allowed = await checkAdmin();
+
+  if (allowed) {
+    showMessage("Login successful.");
+    await loadPosts();
+  }
+});
+
+async function uploadImage(file) {
+  if (!file) return existingImageUrl;
+
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please select an image file.");
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error("Image must be 5 MB or smaller.");
+  }
+
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) throw new Error("Please log in again.");
+
+  const extension = (file.name.split(".").pop() || "jpg")
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toLowerCase();
+
+  const path = user.id + "/" + Date.now() + "-" +
+    Math.random().toString(36).slice(2) + "." + extension;
+
+  const { error } = await supabaseClient.storage
+    .from("akm-post-images")
+    .upload(path, file, {
+      cacheControl: "3600",
+      upsert: false,
+      contentType: file.type
+    });
+
+  if (error) throw error;
+
+  const { data } = supabaseClient.storage
+    .from("akm-post-images")
+    .getPublicUrl(path);
+
+  return data.publicUrl;
+}
+
+$("postForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  $("saveButton").disabled = true;
+  showMessage("Saving post...");
+
+  try {
+    const title = $("title").value.trim();
+    const content = $("content").value.trim();
+    const postUrl = $("postUrl").value.trim();
+    const file = $("imageFile").files[0];
+
+    const imageUrl = await uploadImage(file);
+
+    const post = {
+      title,
+      content,
+      post_url: postUrl || null,
+      image_url: imageUrl || null
+    };
+
+    let result;
+
+    if (editingId !== null) {
+      result = await supabaseClient
+        .from("posts")
+        .update(post)
+        .eq("id", editingId);
+    } else {
+      result = await supabaseClient
+        .from("posts")
+        .insert([post]);
+    }
+
+    if (result.error) throw result.error;
+
+    showMessage(editingId !== null
+      ? "Post updated successfully."
+      : "Post published successfully.");
+
+    resetPostForm();
+    await loadPosts();
+  } catch (error) {
+    showMessage("Could not save post: " + error.message);
+  } finally {
+    $("saveButton").disabled = false;
+  }
+});
+
+async function loadPosts() {
+  $("postsList").textContent = "Loading posts...";
+
+  const { data, error } = await supabaseClient
+    .from("posts")
+    .select("id,title,content,image_url,post_url,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    $("postsList").textContent = "Could not load posts: " + error.message;
+    return;
+  }
+
+  $("postsList").replaceChildren();
+
+  if (!data || data.length === 0) {
+    $("postsList").textContent = "No posts yet.";
+    return;
+  }
+
+  data.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "post";
+
+    const heading = document.createElement("h3");
+    heading.textContent = post.title || "Untitled";
+    card.appendChild(heading);
+
+    const description = document.createElement("p");
+    description.textContent = post.content || "";
+    card.appendChild(description);
+
+    if (post.image_url) {
+      const image = document.createElement("img");
+      image.src = post.image_url;
+      image.alt = post.title || "Post image";
+      image.loading = "lazy";
+      card.appendChild(image);
+    }
+
+    if (post.post_url) {
+      const link = document.createElement("a");
+      link.href = post.post_url;
+      link.textContent = "Open Post Link";
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      card.appendChild(link);
+    }
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.type = "button";
+    editButton.addEventListener("click", () => editPost(post));
+    card.appendChild(editButton);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.type = "button";
+    deleteButton.className = "danger";
+    deleteButton.addEventListener("click", () => deletePost(post.id));
+    card.appendChild(deleteButton);
+
+    $("postsList").appendChild(card);
+  });
+}
+
+function editPost(post) {
+  editingId = post.id;
+  existingImageUrl = post.image_url || "";
+
+  $("title").value = post.title || "";
+  $("content").value = post.content || "";
+  $("postUrl").value = post.post_url || "";
+  $("imageFile").value = "";
+
+  $("formHeading").textContent = "Edit Post";
+  $("saveButton").textContent = "Update Post";
+  $("cancelButton").classList.remove("hidden");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  showMessage("Editing: " + (post.title || "Untitled"));
+}
+
+async function deletePost(id) {
+  if (!confirm("Are you sure you want to delete this post?")) return;
+
+  showMessage("Deleting post...");
+
+  const { error } = await supabaseClient
+    .from("posts")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    showMessage("Delete failed: " + error.message);
+    return;
+  }
+
+  showMessage("Post deleted.");
+  await loadPosts();
+}
+
+$("cancelButton").addEventListener("click", () => {
+  resetPostForm();
+  showMessage("Edit cancelled.");
+});
+
+$("refreshButton").addEventListener("click", loadPosts);
+
+$("logoutButton").addEventListener("click", async () => {
+  await supabaseClient.auth.signOut();
+  resetPostForm();
+  showLogin();
+  showMessage("You have logged out.");
+});
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_OUT" || !session) {
+    showLogin();
+  }
+});
+
+(async function start() {
+  const allowed = await checkAdmin();
+  if (allowed) await loadPosts();
+})();
+</script>
+</body>
+</html>
