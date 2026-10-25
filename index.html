@@ -1,995 +1,226 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>AKM EDITS | Aslam Khan Mahar</title>  <style>  
-:root {  
-    --gold: #ffd700;  
-    --gold-light: #fff2a6;  
-    --red: #ff3030;  
-    --black: #080808;  
-    --panel: #141414;  
-    --border: rgba(255,215,0,.28);  
-}  
-  
-* {  
-    box-sizing: border-box;  
-}  
-  
-html {  
-    scroll-behavior: smooth;  
-}  
-  
-body {  
-    margin: 0;  
-    background:  
-        radial-gradient(ellipse at top, #29200a 0%, #0b0b0b 48%, #050505 100%);  
-    color: #f7f4e9;  
-    font-family: Arial, sans-serif;  
-    text-align: center;  
-    position: relative;  
-    min-height: 100vh;  
-    overflow-x: hidden;  
-}  
-  
-header {  
-    padding: 36px 14px 30px;  
-    background: linear-gradient(145deg, #17130a, #080808 65%, #211900);  
-    border-bottom: 2px solid var(--gold);  
-    box-shadow: 0 8px 35px rgba(255,215,0,.12);  
-}  
-  
-.brand {  
-    color: var(--gold);  
-    font-size: clamp(34px, 8vw, 52px);  
-    font-weight: 900;  
-    letter-spacing: 3px;  
-    text-shadow: 0 0 12px rgba(255,215,0,.4);  
-    animation: goldGlow 3s ease-in-out infinite alternate;  
-}  
-  
-@keyframes goldGlow {  
-    from {  
-        text-shadow: 0 0 8px rgba(255,215,0,.3);  
-    }  
-    to {  
-        text-shadow: 0 0 14px #ffd700, 0 0 32px rgba(255,170,0,.45);  
-    }  
-}  
-  
-.name {  
-    letter-spacing: 3px;  
-    font-size: 14px;  
-    color: var(--gold-light);  
-    margin-top: 10px;  
-}  
-  
-section {  
-    padding: 24px 14px;  
-}  
-  
-h2 {  
-    color: var(--gold);  
-    text-shadow: 0 0 12px rgba(255,215,0,.18);  
-}  
-  
-.card {  
-    background: linear-gradient(145deg, #1b1b1b, #101010);  
-    border: 1px solid var(--border);  
-    border-radius: 18px;  
-    padding: 22px 17px;  
-    margin: 18px auto;  
-    max-width: 520px;  
-    box-shadow: 0 10px 28px rgba(0,0,0,.35);  
-    transition: border-color .25s ease, box-shadow .25s ease,  
-                transform .25s ease;  
-}  
-  
-.card:hover {  
-    border-color: rgba(255,215,0,.7);  
-    box-shadow: 0 12px 32px rgba(255,215,0,.09);  
-    transform: translateY(-3px);  
-}  
-  
-.button {  
-    display: block;  
-    width: 270px;  
-    max-width: 100%;  
-    margin: 13px auto;  
-    padding: 14px 16px;  
-    border: 1px solid transparent;  
-    border-radius: 10px;  
-    text-decoration: none;  
-    font-size: 15px;  
-    font-weight: 800;  
-    cursor: pointer;  
-    transition: transform .2s ease, filter .2s ease,  
-                box-shadow .2s ease;  
-}  
-  
-.button:hover {  
-    transform: translateY(-2px);  
-    filter: brightness(1.12);  
-}  
-  
-.youtube {  
-    background: linear-gradient(135deg, #ff3434, #c40000);  
-    color: white;  
-    box-shadow: 0 5px 16px rgba(255,0,0,.16);  
-}  
-  
-.tiktok {  
-    background: #101010;  
-    color: white;  
-    border-color: #00f2ea;  
-    box-shadow: 0 0 12px rgba(0,242,234,.08);  
-}  
-  
-.whatsapp {  
-    background: linear-gradient(135deg, #20b95b, #087b36);  
-    color: white;  
-}  
-  
-.gold-button {  
-    background: linear-gradient(135deg, #fff0a0, #ffd700, #d9a900);  
-    color: #111;  
-    box-shadow: 0 4px 15px rgba(255,215,0,.15);  
-}  
-  
-.edit-button {  
-    background: #285cc4;  
-    color: white;  
-}  
-  
-.delete-button {  
-    background: #b91c1c;  
-    color: white;  
-}  
-  
-input, textarea {  
-    width: 100%;  
-    margin: 8px 0;  
-    padding: 13px;  
-    border-radius: 9px;  
-    border: 1px solid #454545;  
-    background: #0b0b0b;  
-    color: white;  
-    font-size: 16px;  
-    outline: none;  
-}  
-  
-input:focus, textarea:focus {  
-    border-color: var(--gold);  
-    box-shadow: 0 0 0 2px rgba(255,215,0,.08);  
-}  
-  
-textarea {  
-    min-height: 100px;  
-    resize: vertical;  
-}  
-  
-input[type=file] {  
-    font-size: 13px;  
-}  
-  
-.post {  
-    border-bottom: 1px solid #383838;  
-    padding: 18px 0;  
-    overflow-wrap: anywhere;  
-}  
-  
-.post img {  
-    display: block;  
-    max-width: 100%;  
-    max-height: 350px;  
-    object-fit: contain;  
-    margin: 14px auto;  
-    border-radius: 12px;  
-}  
-  
-.post a {  
-    color: var(--gold);  
-}  
-  
-.post-actions {  
-    display: flex;  
-    justify-content: center;  
-    gap: 8px;  
-    flex-wrap: wrap;  
-    margin-top: 12px;  
-}  
-  
-.post-actions button {  
-    padding: 10px 14px;  
-    border: 0;  
-    border-radius: 8px;  
-    font-weight: bold;  
-    cursor: pointer;  
-}  
-  
-.small {  
-    color: #bcbcbc;  
-    font-size: 13px;  
-}  
-  
-.message {  
-    color: var(--gold);  
-    overflow-wrap: anywhere;  
-}  
-  
-footer {  
-    padding: 24px 12px;  
-    color: var(--gold);  
-    border-top: 1px solid var(--border);  
-    background: rgba(0,0,0,.35);  
-}  
-  
-.gear {  
-    display: inline-block;  
-    animation: gearRotate 5s linear infinite;  
-}  
-  
-@keyframes gearRotate {  
-    from { transform: rotate(0deg); }  
-    to { transform: rotate(360deg); }  
-}  
-  
-body::before {  
-    content: "";  
-    position: fixed;  
-    inset: 0;  
-    pointer-events: none;  
-    z-index: 0;  
-    opacity: .45;  
-    background-image:  
-        radial-gradient(2px 2px at 20px 30px, #ffd700 98%, transparent),  
-        radial-gradient(2px 2px at 80px 100px, #fff 98%, transparent),  
-        radial-gradient(3px 3px at 150px 60px, #ffd700 98%, transparent),  
-        radial-gradient(2px 2px at 120px 150px, #fff 98%, transparent);  
-    background-size: 180px 180px;  
-    animation: starMove 24s linear infinite;  
-}  
-  
-body > header,  
-body > section,  
-body > footer {  
-    position: relative;  
-    z-index: 1;  
-}  
-  
-@keyframes starMove {  
-    from { background-position: 0 0; }  
-    to { background-position: 0 -180px; }  
-}  
-  
-button:disabled {  
-    opacity: .6;  
-    cursor: wait;  
-}  
-  
-@media (max-width: 480px) {  
-    header {  
-        padding: 28px 10px;  
-    }  
-  
-    section {  
-        padding: 19px 12px;  
-    }  
-  
-    .card {  
-        padding: 18px 13px;  
-        border-radius: 14px;  
-    }  
-  
-    .name {  
-        letter-spacing: 2px;  
-    }  
-}  
-  
-@media (prefers-reduced-motion: reduce) {  
-    *, *::before, *::after {  
-        animation-duration: .01ms !important;  
-        animation-iteration-count: 1 !important;  
-        scroll-behavior: auto !important;  
-        transition-duration: .01ms !important;  
-    }  
-}  
-</style>  </head>  <body>  <header>  
-    <div class="brand">AKM EDITS</div>  
-    <p class="name">ASLAM KHAN MAHAR</p>  
-    <p>👑 Editing • Creativity • Islamic Content</p>  
-</header>  <section>  
-    <h2>السلام علیکم ورحمۃ اللہ وبرکاتہ</h2>  
-    <p>Welcome to AKM EDITS ❤️</p>  
-</section>  <section>  
-    <h2>▶ KHR EDITING TUTORIALS</h2>  
-    <a class="button youtube"  
-       href="https://youtu.be/4iE2sqKAXYE?feature=shared"  
-       target="_blank" rel="noopener noreferrer">▶ YOUTUBE LINK 1</a>  
-    <a class="button youtube"  
-       href="https://youtu.be/lQEiH6lt0wA?feature=shared"  
-       target="_blank" rel="noopener noreferrer">▶ YOUTUBE LINK 2</a>  
-</section>  <section>  
-    <h2>FOLLOW AKM EDITS</h2>  
-    <a class="button tiktok"  
-       href="https://www.tiktok.com/@aslam_edit3"  
-       target="_blank" rel="noopener noreferrer">♪ FOLLOW ON TIKTOK</a>  
-    <a class="button whatsapp"  
-       href="https://whatsapp.com/channel/0029VbEIlU0BlHpkgOQ7cJ1F"  
-       target="_blank" rel="noopener noreferrer">● JOIN WHATSAPP CHANNEL</a>  
-</section>  <section>  
-    <h2>📝 LATEST POSTS</h2>  
-    <div id="publicPosts" class="card">  
-        <p class="small">Loading posts...</p>  
-    </div>  
-</section>  <section>  
-    <div id="adminLogin" class="card">  
-        <h2>🔐 ADMIN LOGIN</h2>  <input type="email" id="adminEmail"  
-           placeholder="Admin Email"  
-           autocomplete="username">  
-
-    <input type="password" id="adminPassword"  
-           placeholder="Admin Password"  
-           autocomplete="current-password">  
-
-    <button type="button" id="loginButton"  
-            class="button gold-button">🔓 LOGIN</button>  
-
-    <p id="loginMessage" class="message" role="status"></p>  
-</div>  
-
-<div id="adminArea" style="display:none">  
-    <h2>👑 AKM EDITS ADMIN PANEL</h2>  
-
-    <div class="card">  
-        <p class="small">  
-            Add, edit and delete online posts.  
-            Select an image from your mobile gallery.  
-        </p>  
-
-        <input id="postTitle" type="text"  
-               maxlength="100" placeholder="Post title">  
-
-        <textarea id="postText" maxlength="5000"  
-                  placeholder="Write your post here..."></textarea>  
-
-        <input id="postLink" type="url"  
-               placeholder="Optional link (https://...)">  
-
-        <label for="postImage" class="small">  
-            🖼️ Select image (optional)  
-        </label>  
-
-        <input id="postImage" type="file"  
-               accept="image/png,image/jpeg,image/webp">  
-
-        <p id="imageStatus" class="small"></p>  
-
-        <button id="saveButton"  
-                type="button"  
-                class="button gold-button">+ ADD POST</button>  
-
-        <button id="cancelButton"  
-                type="button"  
-                class="button"  
-                style="background:#333;color:white">  
-            CANCEL EDIT  
-        </button>  
-
-        <p id="adminMessage" class="message" role="status"></p>  
-
-        <button id="logoutButton"  
-                type="button"  
-                class="button"  
-                style="background:#8b0000;color:white">  
-            🔒 LOG OUT  
-        </button>  
-    </div>  
-
-    <h2><span class="gear">⚙️</span> MANAGE YOUR POSTS</h2>  
-    <div id="managePosts" class="card"></div>  
-</div>
-
-</section>  <footer>  
-    <p>تاجدار ختم نبوت زندہ باد زندہ باد زندہ باد 💖</p>  
-    <p>© AKM EDITS | Aslam Khan Mahar</p>  
-</footer>  <!-- Load Supabase BEFORE the website JavaScript -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script>  
-"use strict";  
-  
-/* =========================================  
-   1. ADD YOUR SUPABASE PROJECT DETAILS HERE  
-   Use the Project URL, not a /rest/v1 URL.  
-   Use only the publishable key, never secret.  
-========================================= */  
-  
-const SUPABASE_URL = "https://klvgqdzwjadigjdeowml.supabase.co";  
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_IuBR3NBb4rUP9g7Oj_Kskg_y_-kZRg3";  
-  
-const STORAGE_BUCKET = "akm-post-images";  
-  
-const publicArea = document.getElementById("publicPosts");  
-const manageArea = document.getElementById("managePosts");  
-const loginArea = document.getElementById("adminLogin");  
-const adminArea = document.getElementById("adminArea");  
-const loginMessage = document.getElementById("loginMessage");  
-const adminMessage = document.getElementById("adminMessage");  
-const titleInput = document.getElementById("postTitle");  
-const textInput = document.getElementById("postText");  
-const linkInput = document.getElementById("postLink");  
-const imageInput = document.getElementById("postImage");  
-const imageStatus = document.getElementById("imageStatus");  
-const saveButton = document.getElementById("saveButton");  
-  
-let supabaseClient = null;  
-let currentUser = null;  
-let editingId = null;  
-let existingImageUrl = "";  
-let selectedFile = null;  
-let busy = false;  
-  
-function showMessage(element, text, isError = false) {  
-    element.textContent = text;  
-    element.style.color = isError ? "#ff5555" : "#ffd700";  
-}  
-  
-function makeElement(tag, className, text) {  
-    const el = document.createElement(tag);  
-    if (className) el.className = className;  
-    if (text !== undefined) el.textContent = text;  
-    return el;  
-}  
-  
-function setBusy(value) {  
-    busy = value;  
-    saveButton.disabled = value;  
-    document.getElementById("loginButton").disabled = value;  
-}  
-  
-function validHttpUrl(value) {  
-    if (!value) return "";  
-    try {  
-        const url = new URL(value);  
-        return ["https:", "http:"].includes(url.protocol)  
-            ? url.href : null;  
-    } catch {  
-        return null;  
-    }  
-}  
-  
-/* =========================================  
-   2. PUBLIC POSTS  
-========================================= */  
-  
-async function loadPosts() {  
-    publicArea.replaceChildren(  
-        makeElement("p", "small", "Loading posts...")  
-    );  
-  
-    if (!supabaseClient) {  
-        publicArea.replaceChildren(  
-            makeElement("p", "small",  
-                "Website setup incomplete. Add your Supabase URL and publishable key.")  
-        );  
-        return;  
-    }  
-  
-    const { data, error } = await supabaseClient  
-        .from("posts")  
-        .select("id,title,content,image_url,post_url,created_at")  
-        .order("created_at", { ascending: false });  
-  
-    if (error) {  
-        console.error("Load posts:", error);  
-        publicArea.replaceChildren(  
-            makeElement("p", "small",  
-                "Could not load posts. Check Supabase connection and read policy.")  
-        );  
-        return;  
-    }  
-  
-    publicArea.replaceChildren();  
-  
-    if (!data || data.length === 0) {  
-        publicArea.appendChild(  
-            makeElement("p", "small", "No posts yet.")  
-        );  
-        return;  
-    }  
-  
-    data.forEach(post => {  
-        const item = makeElement("article", "post");  
-        item.appendChild(makeElement("h3", "", post.title));  
-        item.appendChild(makeElement("p", "", post.content || ""));  
-  
-        if (post.image_url) {  
-            const img = document.createElement("img");  
-            img.src = post.image_url;  
-            img.alt = post.title || "AKM EDITS post image";  
-            img.loading = "lazy";  
-            img.onerror = () => img.remove();  
-            item.appendChild(img);  
-        }  
-  
-        if (post.post_url) {  
-            const url = validHttpUrl(post.post_url);  
-            if (url) {  
-                const link = document.createElement("a");  
-                link.href = url;  
-                link.target = "_blank";  
-                link.rel = "noopener noreferrer";  
-                link.textContent = "Open link ↗";  
-                item.appendChild(link);  
-            }  
-        }  
-  
-        if (post.created_at) {  
-            const date = new Date(post.created_at);  
-            if (!Number.isNaN(date.getTime())) {  
-                item.appendChild(  
-                    makeElement("p", "small", date.toLocaleDateString())  
-                );  
-            }  
-        }  
-  
-        publicArea.appendChild(item);  
-    });  
-}  
-  
-/* =========================================  
-   3. ADMIN AUTHENTICATION  
-========================================= */  
-  
-async function checkAdminLogin() {  
-    if (busy) return;  
-  
-    if (!supabaseClient) {  
-        showMessage(loginMessage,  
-            "First add your Supabase URL and publishable key.", true);  
-        return;  
-    }  
-  
-    const email = document.getElementById("adminEmail").value.trim();  
-    const password = document.getElementById("adminPassword").value;  
-  
-    if (!email || !password) {  
-        showMessage(loginMessage, "Enter your email and password.", true);  
-        return;  
-    }  
-  
-    setBusy(true);  
-    showMessage(loginMessage, "Signing in...");  
-  
-    try {  
-        const { data, error } = await supabaseClient.auth  
-            .signInWithPassword({ email, password });  
-  
-        if (error) throw error;  
-  
-        currentUser = data.user;  
-  
-        const { data: isAdmin, error: adminError } =  
-            await supabaseClient.rpc("is_site_admin");  
-  
-        if (adminError) {  
-            await supabaseClient.auth.signOut();  
-            currentUser = null;  
-            throw new Error(  
-                "Admin verification failed. Check your site_admins entry and is_site_admin function."  
-            );  
-        }  
-  
-        if (isAdmin !== true) {  
-            await supabaseClient.auth.signOut();  
-            currentUser = null;  
-            throw new Error("This account is not authorised as a site admin.");  
-        }  
-  
-        loginArea.style.display = "none";  
-        adminArea.style.display = "block";  
-        document.getElementById("adminPassword").value = "";  
-  
-        showMessage(adminMessage, "Admin login successful.");  
-        await renderManagePosts();  
-        window.scrollTo({ top: adminArea.offsetTop, behavior: "smooth" });  
-  
-    } catch (error) {  
-        console.error("Login error:", error);  
-        showMessage(loginMessage, error.message || "Login failed.", true);  
-    } finally {  
-        setBusy(false);  
-    }  
-}  
-  
-async function restoreSession() {  
-    if (!supabaseClient) {  
-        await loadPosts();  
-        return;  
-    }  
-  
-    const { data, error } = await supabaseClient.auth.getSession();  
-  
-    if (error) {  
-        console.error(error);  
-        await loadPosts();  
-        return;  
-    }  
-  
-    if (data.session) {  
-        currentUser = data.session.user;  
-  
-        const { data: isAdmin, error: adminError } =  
-            await supabaseClient.rpc("is_site_admin");  
-  
-        if (!adminError && isAdmin === true) {  
-            loginArea.style.display = "none";  
-            adminArea.style.display = "block";  
-            await renderManagePosts();  
-        } else {  
-            await supabaseClient.auth.signOut();  
-            currentUser = null;  
-        }  
-    }  
-  
-    await loadPosts();  
-}  
-  
-async function logoutAdmin() {  
-    if (!supabaseClient) return;  
-  
-    await supabaseClient.auth.signOut();  
-    currentUser = null;  
-    adminArea.style.display = "none";  
-    loginArea.style.display = "block";  
-  
-    resetForm();  
-    showMessage(loginMessage, "You have logged out.");  
-    window.scrollTo({ top: 0, behavior: "smooth" });  
-}  
-  
-/* =========================================  
-   4. IMAGE SELECTION AND STORAGE UPLOAD  
-========================================= */  
-  
-imageInput.addEventListener("change", () => {  
-    selectedFile = imageInput.files && imageInput.files[0]  
-        ? imageInput.files[0] : null;  
-  
-    if (!selectedFile) {  
-        imageStatus.textContent = "";  
-        return;  
-    }  
-  
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];  
-  
-    if (!allowedTypes.includes(selectedFile.type)) {  
-        selectedFile = null;  
-        imageInput.value = "";  
-        imageStatus.textContent = "Choose a JPG, PNG or WebP image.";  
-        return;  
-    }  
-  
-    if (selectedFile.size > 5 * 1024 * 1024) {  
-        selectedFile = null;  
-        imageInput.value = "";  
-        imageStatus.textContent = "Image must be smaller than 5 MB.";  
-        return;  
-    }  
-  
-    imageStatus.textContent = "Selected: " + selectedFile.name;  
-});  
-  
-async function uploadImage(file) {  
-    if (!currentUser) {  
-        throw new Error("Please log in again.");  
-    }  
-  
-    const extensionMap = {  
-        "image/jpeg": "jpg",  
-        "image/png": "png",  
-        "image/webp": "webp"  
-    };  
-  
-    const extension = extensionMap[file.type];  
-  
-    if (!extension) {  
-        throw new Error("Unsupported image type.");  
-    }  
-  
-    const path = currentUser.id + "/" +  
-        Date.now() + "-" +  
-        crypto.randomUUID() + "." + extension;  
-  
-    const { error } = await supabaseClient.storage  
-        .from(STORAGE_BUCKET)  
-        .upload(path, file, {  
-            cacheControl: "3600",  
-            contentType: file.type,  
-            upsert: false  
-        });  
-  
-    if (error) throw error;  
-  
-    const { data } = supabaseClient.storage  
-        .from(STORAGE_BUCKET)  
-        .getPublicUrl(path);  
-  
-    if (!data || !data.publicUrl) {  
-        throw new Error("Could not create the image URL.");  
-    }  
-  
-    return data.publicUrl;  
-}  
-  
-/* =========================================  
-   5. ADD AND EDIT POSTS  
-========================================= */  
-  
-async function savePost() {  
-    if (busy) return;  
-  
-    if (!currentUser) {  
-        showMessage(adminMessage, "Please log in again.", true);  
-        return;  
-    }  
-  
-    const title = titleInput.value.trim();  
-    const content = textInput.value.trim();  
-    const rawLink = linkInput.value.trim();  
-  
-    if (!title || !content) {  
-        showMessage(adminMessage, "Enter a title and post text.", true);  
-        return;  
-    }  
-  
-    const postUrl = validHttpUrl(rawLink);  
-  
-    if (rawLink && !postUrl) {  
-        showMessage(adminMessage,  
-            "Enter a valid HTTP or HTTPS link.", true);  
-        return;  
-    }  
-  
-    setBusy(true);  
-  
-    try {  
-        let imageUrl = existingImageUrl;  
-  
-        if (selectedFile) {  
-            showMessage(adminMessage, "Uploading image...");  
-            imageUrl = await uploadImage(selectedFile);  
-        }  
-  
-        const postData = {  
-            title: title,  
-            content: content,  
-            image_url: imageUrl || null,  
-            post_url: postUrl || null  
-        };  
-  
-        let result;  
-  
-        if (editingId !== null) {  
-            result = await supabaseClient  
-                .from("posts")  
-                .update(postData)  
-                .eq("id", editingId)  
-                .select("id");  
-        } else {  
-            result = await supabaseClient  
-                .from("posts")  
-                .insert(postData)  
-                .select("id");  
-        }  
-  
-        if (result.error) throw result.error;  
-  
-        if (!result.data || result.data.length === 0) {  
-            throw new Error(  
-                "No post was saved. Check your admin permissions and RLS policies."  
-            );  
-        }  
-  
-        showMessage(adminMessage,  
-            editingId !== null ? "Post updated successfully!" :  
-                                  "Post published successfully!");  
-  
-        resetForm();  
-        await loadPosts();  
-        await renderManagePosts();  
-  
-    } catch (error) {  
-        console.error("Save post:", error);  
-        showMessage(adminMessage,  
-            error.message || "Could not save post.", true);  
-    } finally {  
-        setBusy(false);  
-    }  
-}  
-  
-/* =========================================  
-   6. ADMIN POSTS LIST  
-========================================= */  
-  
-async function renderManagePosts() {  
-    if (!currentUser) return;  
-  
-    manageArea.replaceChildren(  
-        makeElement("p", "small", "Loading your posts...")  
-    );  
-  
-    const { data, error } = await supabaseClient  
-        .from("posts")  
-        .select("id,title,content,image_url,post_url,created_at")  
-        .order("created_at", { ascending: false });  
-  
-    if (error) {  
-        console.error(error);  
-        manageArea.replaceChildren(  
-            makeElement("p", "small", "Could not load posts.")  
-        );  
-        return;  
-    }  
-  
-    manageArea.replaceChildren();  
-  
-    if (!data || data.length === 0) {  
-        manageArea.appendChild(  
-            makeElement("p", "small", "No posts to manage yet.")  
-        );  
-        return;  
-    }  
-  
-    data.forEach(post => {  
-        const item = makeElement("div", "post");  
-        item.appendChild(makeElement("h3", "", post.title));  
-  
-        const actions = makeElement("div", "post-actions");  
-  
-        const edit = makeElement("button", "edit-button", "✏️ EDIT");  
-        edit.type = "button";  
-        edit.addEventListener("click", () => editPost(post));  
-  
-        const remove = makeElement("button", "delete-button", "🗑️ DELETE");  
-        remove.type = "button";  
-        remove.addEventListener("click", () => deletePost(post));  
-  
-        actions.append(edit, remove);  
-        item.appendChild(actions);  
-        manageArea.appendChild(item);  
-    });  
-}  
-  
-function editPost(post) {  
-    editingId = post.id;  
-    existingImageUrl = post.image_url || "";  
-    selectedFile = null;  
-  
-    titleInput.value = post.title || "";  
-    textInput.value = post.content || "";  
-    linkInput.value = post.post_url || "";  
-    imageInput.value = "";  
-  
-    imageStatus.textContent = existingImageUrl  
-        ? "Existing image will be kept unless you select another."  
-        : "No existing image.";  
-  
-    saveButton.textContent = "💾 SAVE CHANGES";  
-    showMessage(adminMessage, "Editing: " + post.title);  
-  
-    titleInput.scrollIntoView({  
-        behavior: "smooth",  
-        block: "center"  
-    });  
-}  
-  
-/* =========================================  
-   7. DELETE POSTS  
-========================================= */  
-  
-async function deletePost(post) {  
-    if (!currentUser || busy) return;  
-  
-    if (!confirm("Delete this post permanently?")) return;  
-  
-    setBusy(true);  
-  
-    try {  
-        const { data, error } = await supabaseClient  
-            .from("posts")  
-            .delete()  
-            .eq("id", post.id)  
-            .select("id");  
-  
-        if (error) throw error;  
-  
-        if (!data || data.length === 0) {  
-            throw new Error("Post was not deleted. Check admin permissions.");  
-        }  
-  
-        showMessage(adminMessage, "Post deleted.");  
-  
-        if (editingId === post.id) resetForm();  
-  
-        await loadPosts();  
-        await renderManagePosts();  
-  
-    } catch (error) {  
-        console.error(error);  
-        showMessage(adminMessage,  
-            error.message || "Could not delete post.", true);  
-    } finally {  
-        setBusy(false);  
-    }  
-}  
-  
-/* =========================================  
-   8. FORM RESET AND BUTTONS  
-========================================= */  
-  
-function resetForm() {  
-    editingId = null;  
-    existingImageUrl = "";  
-    selectedFile = null;  
-  
-    titleInput.value = "";  
-    textInput.value = "";  
-    linkInput.value = "";  
-    imageInput.value = "";  
-    imageStatus.textContent = "";  
-  
-    saveButton.textContent = "+ ADD POST";  
-}  
-  
-function cancelEdit() {  
-    resetForm();  
-    showMessage(adminMessage, "Form cleared.");  
-}  
-  
-document.getElementById("loginButton")  
-    .addEventListener("click", checkAdminLogin);  
-  
-document.getElementById("logoutButton")  
-    .addEventListener("click", logoutAdmin);  
-  
-document.getElementById("saveButton")  
-    .addEventListener("click", savePost);  
-  
-document.getElementById("cancelButton")  
-    .addEventListener("click", cancelEdit);  
-  
-document.getElementById("adminPassword")  
-    .addEventListener("keydown", event => {  
-        if (event.key === "Enter") checkAdminLogin();  
-    });  
-  
-/* =========================================  
-   9. START WEBSITE  
-========================================= */  
-  
-try {  
-    if (  
-        !window.supabase ||  
-        SUPABASE_URL === "PASTE_YOUR_PROJECT_URL_HERE" ||  
-        SUPABASE_PUBLISHABLE_KEY === "PASTE_YOUR_PUBLISHABLE_KEY_HERE"  
-    ) {  
-        publicArea.replaceChildren(  
-            makeElement("p", "small",  
-                "Setup required: add your Supabase Project URL and Publishable Key in the code.")  
-        );  
-        showMessage(loginMessage, "Supabase setup required.", true);  
-    } else {  
-        supabaseClient = window.supabase.createClient(  
-            SUPABASE_URL,  
-            SUPABASE_PUBLISHABLE_KEY  
-        );  
-  
-        restoreSession();  
-    }  
-} catch (error) {  
-    console.error(error);  
-    publicArea.replaceChildren(  
-        makeElement("p", "small", "Could not initialise Supabase.")  
-    );  
-}  
-</script>  </body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="AKM EDITS by Aslam Khan Mahar — editing tutorials, Islamic content and latest posts.">
+<title>AKM EDITS | Aslam Khan Mahar</title>
+<style>
+:root{--gold:#ffd700;--gold-light:#fff2a6;--black:#080808;--panel:#141414;--border:rgba(255,215,0,.3);--muted:#bdb7a3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;min-height:100vh;overflow-x:hidden;background:radial-gradient(ellipse at 50% -10%,#382a08 0%,#111 38%,#050505 78%);color:#f7f4e9;font-family:Arial,Helvetica,sans-serif;text-align:center}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.22;background-image:radial-gradient(2px 2px at 20px 30px,#ffd700 98%,transparent),radial-gradient(2px 2px at 80px 100px,#fff 98%,transparent),radial-gradient(3px 3px at 150px 60px,#ffd700 98%,transparent);background-size:180px 180px;animation:stars 28s linear infinite}
+body>*{position:relative;z-index:1}
+@keyframes stars{to{background-position:0 -180px}}
+header{padding:42px 14px 32px;background:linear-gradient(135deg,#211a07,#080808 55%,#2b2100);border-bottom:2px solid var(--gold);box-shadow:0 10px 38px #ffd70018;position:relative}
+header:after{content:"";display:block;width:min(180px,45%);height:2px;margin:22px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.brand{color:var(--gold);font-size:clamp(34px,8vw,56px);font-weight:900;letter-spacing:clamp(2px,1vw,5px);text-shadow:0 0 12px #ffd70055,0 0 30px #ffae0030;animation:glow 3s ease-in-out infinite alternate}
+@keyframes glow{to{text-shadow:0 0 16px #ffd700,0 0 36px #ffae0066}}
+.name{letter-spacing:3px;font-size:13px;color:var(--gold-light);margin-top:12px}
+header p:last-child{color:#e8dfc0}
+section{padding:25px 14px}
+h2{color:var(--gold);text-shadow:0 0 14px #ffd70024;letter-spacing:.5px}
+.card{width:min(100%,560px);background:linear-gradient(145deg,#1c1a13,#0d0d0d 72%);border:1px solid var(--border);border-radius:18px;padding:23px 18px;margin:18px auto;box-shadow:0 12px 32px #0008,inset 0 1px #ffffff08;transition:border-color .25s,box-shadow .25s,transform .25s}
+.card:hover{border-color:#ffd70099;box-shadow:0 14px 36px #ffd70012,inset 0 1px #ffffff0c;transform:translateY(-2px)}
+.button{display:block;width:290px;max-width:100%;margin:13px auto;padding:14px 16px;border:1px solid #ffd70066;border-radius:11px;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:.25px;cursor:pointer;transition:transform .2s,filter .2s,box-shadow .2s}
+.button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 7px 22px #ffd70020}
+.youtube,.whatsapp{background:linear-gradient(135deg,#fff0a0,#ffd700 48%,#c28b00);color:#151006;border-color:#ffe77a;box-shadow:0 5px 18px #ffd70020}
+.tiktok{background:linear-gradient(135deg,#181818,#080808);color:#fff;border:1px solid var(--gold);box-shadow:inset 0 0 0 1px #ffd70018}
+.gold-button{background:linear-gradient(135deg,#fff2a6,#ffd700 48%,#c99700);color:#171100;border-color:#fff0a0;box-shadow:0 5px 18px #ffd70020}
+.edit-button{background:#285cc4;color:#fff}.delete-button{background:#a71919;color:#fff}
+input,textarea{width:100%;margin:8px 0;padding:13px;border-radius:9px;border:1px solid #48412a;background:#090909;color:#fff;font-size:16px;outline:none}
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #ffd70014}
+textarea{min-height:100px;resize:vertical}input[type=file]{font-size:13px}
+.post{border-bottom:1px solid #393323;padding:18px 0;overflow-wrap:anywhere}.post:last-child{border-bottom:0}
+.post h3{color:var(--gold-light)}.post img{display:block;max-width:100%;max-height:350px;object-fit:contain;margin:14px auto;border-radius:12px;border:1px solid #ffd70030}
+.post a{color:var(--gold)}.post-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.post-actions button{padding:10px 14px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.small{color:var(--muted);font-size:13px;line-height:1.6}.message{color:var(--gold);overflow-wrap:anywhere;line-height:1.5}
+footer{padding:24px 12px;color:var(--gold);border-top:1px solid var(--border);background:#050505aa;line-height:1.7}
+.gear{display:inline-block;animation:rotate 5s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}
+button:disabled{opacity:.6;cursor:wait}
+@media(max-width:480px){header{padding:30px 10px}section{padding:19px 12px}.card{padding:18px 13px;border-radius:15px}.name{letter-spacing:2px}.button{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">AKM EDITS</div>
+  <p class="name">ASLAM KHAN MAHAR</p>
+  <p>👑 Editing • Creativity • Islamic Content</p>
+</header>
+<section>
+  <h2>السلام علیکم ورحمۃ اللہ وبرکاتہ</h2>
+  <p>Welcome to AKM EDITS ❤️</p>
+</section>
+<section>
+  <h2>▶ KHR EDITING TUTORIALS</h2>
+  <a class="button youtube" href="https://youtu.be/4iE2sqKAXYE?feature=shared" target="_blank" rel="noopener noreferrer">▶ YOUTUBE LINK 1</a>
+  <a class="button youtube" href="https://youtu.be/lQEiH6lt0wA?feature=shared" target="_blank" rel="noopener noreferrer">▶ YOUTUBE LINK 2</a>
+</section>
+<section>
+  <h2>FOLLOW AKM EDITS</h2>
+  <a class="button tiktok" href="https://www.tiktok.com/@aslam_edit3" target="_blank" rel="noopener noreferrer">♪ FOLLOW ON TIKTOK</a>
+  <a class="button whatsapp" href="https://whatsapp.com/channel/0029VbEIlU0BlHpkgOQ7cJ1F" target="_blank" rel="noopener noreferrer">● JOIN WHATSAPP CHANNEL</a>
+</section>
+<section>
+  <h2>📝 LATEST POSTS</h2>
+  <div id="publicPosts" class="card"><p class="small">Loading posts...</p></div>
+</section>
+<section>
+  <div id="adminLogin" class="card">
+    <h2>🔐 ADMIN LOGIN</h2>
+    <input type="email" id="adminEmail" placeholder="Admin Email" autocomplete="username">
+    <input type="password" id="adminPassword" placeholder="Admin Password" autocomplete="current-password">
+    <button type="button" id="loginButton" class="button gold-button">🔓 LOGIN</button>
+    <p id="loginMessage" class="message" role="status"></p>
+  </div>
+  <div id="adminArea" style="display:none">
+    <h2>👑 AKM EDITS ADMIN PANEL</h2>
+    <div class="card">
+      <p class="small">Add, edit and delete online posts. Select an image from your mobile gallery.</p>
+      <input id="postTitle" type="text" maxlength="100" placeholder="Post title">
+      <textarea id="postText" maxlength="5000" placeholder="Write your post here..."></textarea>
+      <input id="postLink" type="url" placeholder="Optional link (https://...)">
+      <label for="postImage" class="small">🖼️ Select image (optional)</label>
+      <input id="postImage" type="file" accept="image/png,image/jpeg,image/webp">
+      <p id="imageStatus" class="small"></p>
+      <button id="saveButton" type="button" class="button gold-button">+ ADD POST</button>
+      <button id="cancelButton" type="button" class="button" style="background:#333;color:white">CANCEL EDIT</button>
+      <p id="adminMessage" class="message" role="status"></p>
+      <button id="logoutButton" type="button" class="button" style="background:#5e1111;color:white">🔒 LOG OUT</button>
+    </div>
+    <h2><span class="gear">⚙️</span> MANAGE YOUR POSTS</h2>
+    <div id="managePosts" class="card"></div>
+  </div>
+</section>
+<footer>
+  <p>تاجدار ختم نبوت زندہ باد زندہ باد زندہ باد 💖</p>
+  <p>© AKM EDITS | Aslam Khan Mahar</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+"use strict";
+const SUPABASE_URL = "https://klvgqdzwjadigjdeowml.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_IuBR3NBb4rUP9g7Oj_Kskg_y_-kZRg3";
+const STORAGE_BUCKET = "akm-post-images";
+const publicArea = document.getElementById("publicPosts");
+const manageArea = document.getElementById("managePosts");
+const loginArea = document.getElementById("adminLogin");
+const adminArea = document.getElementById("adminArea");
+const loginMessage = document.getElementById("loginMessage");
+const adminMessage = document.getElementById("adminMessage");
+const titleInput = document.getElementById("postTitle");
+const textInput = document.getElementById("postText");
+const linkInput = document.getElementById("postLink");
+const imageInput = document.getElementById("postImage");
+const imageStatus = document.getElementById("imageStatus");
+const saveButton = document.getElementById("saveButton");
+let supabaseClient=null,currentUser=null,editingId=null,existingImageUrl="",selectedFile=null,busy=false;
+function showMessage(el,text,isError=false){el.textContent=text;el.style.color=isError?"#ff5555":"#ffd700"}
+function makeElement(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el}
+function setBusy(value){busy=value;saveButton.disabled=value;document.getElementById("loginButton").disabled=value}
+function validHttpUrl(value){if(!value)return "";try{const url=new URL(value);return ["https:","http:"].includes(url.protocol)?url.href:null}catch{return null}}
+async function loadPosts(){
+ publicArea.replaceChildren(makeElement("p","small","Loading posts..."));
+ if(!supabaseClient){publicArea.replaceChildren(makeElement("p","small","Website setup incomplete. Check Supabase settings."));return}
+ const {data,error}=await supabaseClient.from("posts").select("id,title,content,image_url,post_url,created_at").order("created_at",{ascending:false});
+ if(error){console.error("Load posts:",error);publicArea.replaceChildren(makeElement("p","small","Could not load posts. Check Supabase connection and read policy."));return}
+ publicArea.replaceChildren();
+ if(!data||!data.length){publicArea.appendChild(makeElement("p","small","No posts yet."));return}
+ data.forEach(post=>{
+  const item=makeElement("article","post");item.appendChild(makeElement("h3","",post.title));item.appendChild(makeElement("p","",post.content||""));
+  if(post.image_url){const img=document.createElement("img");img.src=post.image_url;img.alt=post.title||"AKM EDITS post image";img.loading="lazy";img.onerror=()=>img.remove();item.appendChild(img)}
+  if(post.post_url){const url=validHttpUrl(post.post_url);if(url){const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Open link ↗";item.appendChild(a)}}
+  if(post.created_at){const date=new Date(post.created_at);if(!Number.isNaN(date.getTime()))item.appendChild(makeElement("p","small",date.toLocaleDateString()))}
+  publicArea.appendChild(item)
+ })
+}
+async function checkAdminLogin(){
+ if(busy)return;if(!supabaseClient){showMessage(loginMessage,"Supabase setup required.",true);return}
+ const email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
+ if(!email||!password){showMessage(loginMessage,"Enter your email and password.",true);return}
+ setBusy(true);showMessage(loginMessage,"Signing in...");
+ try{
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;currentUser=data.user;
+  const {data:isAdmin,error:adminError}=await supabaseClient.rpc("is_site_admin");
+  if(adminError){await supabaseClient.auth.signOut();currentUser=null;throw new Error("Admin verification failed. Check your site_admins entry and is_site_admin function.")}
+  if(isAdmin!==true){await supabaseClient.auth.signOut();currentUser=null;throw new Error("This account is not authorised as a site admin.")}
+  loginArea.style.display="none";adminArea.style.display="block";document.getElementById("adminPassword").value="";
+  showMessage(adminMessage,"Admin login successful.");await renderManagePosts();window.scrollTo({top:adminArea.offsetTop,behavior:"smooth"})
+ }catch(error){console.error("Login error:",error);showMessage(loginMessage,error.message||"Login failed.",true)}finally{setBusy(false)}
+}
+async function restoreSession(){
+ if(!supabaseClient){await loadPosts();return}
+ const {data,error}=await supabaseClient.auth.getSession();if(error){console.error(error);await loadPosts();return}
+ if(data.session){currentUser=data.session.user;const {data:isAdmin,error:adminError}=await supabaseClient.rpc("is_site_admin");
+  if(!adminError&&isAdmin===true){loginArea.style.display="none";adminArea.style.display="block";await renderManagePosts()}
+  else{await supabaseClient.auth.signOut();currentUser=null}
+ }
+ await loadPosts()
+}
+async function logoutAdmin(){if(!supabaseClient)return;await supabaseClient.auth.signOut();currentUser=null;adminArea.style.display="none";loginArea.style.display="block";resetForm();showMessage(loginMessage,"You have logged out.");window.scrollTo({top:0,behavior:"smooth"})}
+imageInput.addEventListener("change",()=>{
+ selectedFile=imageInput.files&&imageInput.files[0]?imageInput.files[0]:null;if(!selectedFile){imageStatus.textContent="";return}
+ if(!["image/jpeg","image/png","image/webp"].includes(selectedFile.type)){selectedFile=null;imageInput.value="";imageStatus.textContent="Choose a JPG, PNG or WebP image.";return}
+ if(selectedFile.size>5*1024*1024){selectedFile=null;imageInput.value="";imageStatus.textContent="Image must be smaller than 5 MB.";return}
+ imageStatus.textContent="Selected: "+selectedFile.name
+});
+async function uploadImage(file){
+ if(!currentUser)throw new Error("Please log in again.");
+ const ext={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[file.type];if(!ext)throw new Error("Unsupported image type.");
+ const path=currentUser.id+"/"+Date.now()+"-"+crypto.randomUUID()+"."+ext;
+ const {error}=await supabaseClient.storage.from(STORAGE_BUCKET).upload(path,file,{cacheControl:"3600",contentType:file.type,upsert:false});if(error)throw error;
+ const {data}=supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(path);if(!data||!data.publicUrl)throw new Error("Could not create the image URL.");return data.publicUrl
+}
+async function savePost(){
+ if(busy)return;if(!currentUser){showMessage(adminMessage,"Please log in again.",true);return}
+ const title=titleInput.value.trim(),content=textInput.value.trim(),rawLink=linkInput.value.trim();
+ if(!title||!content){showMessage(adminMessage,"Enter a title and post text.",true);return}
+ const postUrl=validHttpUrl(rawLink);if(rawLink&&!postUrl){showMessage(adminMessage,"Enter a valid HTTP or HTTPS link.",true);return}
+ setBusy(true);
+ try{
+  let imageUrl=existingImageUrl;if(selectedFile){showMessage(adminMessage,"Uploading image...");imageUrl=await uploadImage(selectedFile)}
+  const postData={title,content,image_url:imageUrl||null,post_url:postUrl||null};let result;
+  if(editingId!==null)result=await supabaseClient.from("posts").update(postData).eq("id",editingId).select("id");
+  else result=await supabaseClient.from("posts").insert(postData).select("id");
+  if(result.error)throw result.error;if(!result.data||!result.data.length)throw new Error("No post was saved. Check admin permissions and RLS policies.");
+  showMessage(adminMessage,editingId!==null?"Post updated successfully!":"Post published successfully!");resetForm();await loadPosts();await renderManagePosts()
+ }catch(error){console.error("Save post:",error);showMessage(adminMessage,error.message||"Could not save post.",true)}finally{setBusy(false)}
+}
+async function renderManagePosts(){
+ if(!currentUser)return;manageArea.replaceChildren(makeElement("p","small","Loading your posts..."));
+ const {data,error}=await supabaseClient.from("posts").select("id,title,content,image_url,post_url,created_at").order("created_at",{ascending:false});
+ if(error){console.error(error);manageArea.replaceChildren(makeElement("p","small","Could not load posts."));return}
+ manageArea.replaceChildren();if(!data||!data.length){manageArea.appendChild(makeElement("p","small","No posts to manage yet."));return}
+ data.forEach(post=>{const item=makeElement("div","post");item.appendChild(makeElement("h3","",post.title));const actions=makeElement("div","post-actions");
+  const edit=makeElement("button","edit-button","✏️ EDIT");edit.type="button";edit.addEventListener("click",()=>editPost(post));
+  const remove=makeElement("button","delete-button","🗑️ DELETE");remove.type="button";remove.addEventListener("click",()=>deletePost(post));actions.append(edit,remove);item.appendChild(actions);manageArea.appendChild(item)
+ })
+}
+function editPost(post){
+ editingId=post.id;existingImageUrl=post.image_url||"";selectedFile=null;titleInput.value=post.title||"";textInput.value=post.content||"";linkInput.value=post.post_url||"";imageInput.value="";
+ imageStatus.textContent=existingImageUrl?"Existing image will be kept unless you select another.":"No existing image.";saveButton.textContent="💾 SAVE CHANGES";showMessage(adminMessage,"Editing: "+post.title);titleInput.scrollIntoView({behavior:"smooth",block:"center"})
+}
+async function deletePost(post){
+ if(!currentUser||busy)return;if(!confirm("Delete this post permanently?"))return;setBusy(true);
+ try{const {data,error}=await supabaseClient.from("posts").delete().eq("id",post.id).select("id");if(error)throw error;if(!data||!data.length)throw new Error("Post was not deleted. Check admin permissions.");
+  showMessage(adminMessage,"Post deleted.");if(editingId===post.id)resetForm();await loadPosts();await renderManagePosts()
+ }catch(error){console.error(error);showMessage(adminMessage,error.message||"Could not delete post.",true)}finally{setBusy(false)}
+}
+function resetForm(){editingId=null;existingImageUrl="";selectedFile=null;titleInput.value="";textInput.value="";linkInput.value="";imageInput.value="";imageStatus.textContent="";saveButton.textContent="+ ADD POST"}
+function cancelEdit(){resetForm();showMessage(adminMessage,"Form cleared.")}
+document.getElementById("loginButton").addEventListener("click",checkAdminLogin);
+document.getElementById("logoutButton").addEventListener("click",logoutAdmin);
+document.getElementById("saveButton").addEventListener("click",savePost);
+document.getElementById("cancelButton").addEventListener("click",cancelEdit);
+document.getElementById("adminPassword").addEventListener("keydown",event=>{if(event.key==="Enter")checkAdminLogin()});
+try{
+ if(!window.supabase){publicArea.replaceChildren(makeElement("p","small","Could not load Supabase library. Refresh the page and try again."));showMessage(loginMessage,"Supabase library unavailable.",true)}
+ else{supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);restoreSession()}
+}catch(error){console.error(error);publicArea.replaceChildren(makeElement("p","small","Could not initialise Supabase."))}
+</script>
+</body>
 </html>
