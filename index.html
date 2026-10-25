@@ -38,6 +38,8 @@ textarea{min-height:100px;resize:vertical}input[type=file]{font-size:13px}
 .post a{color:var(--gold)}.post-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
 .post-actions button{padding:10px 14px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
 .small{color:var(--muted);font-size:13px;line-height:1.6}.message{color:var(--gold);overflow-wrap:anywhere;line-height:1.5}
+#adminSection{display:none}
+body:has(#adminLogin:target) #adminSection{display:block}
 footer{padding:24px 12px;color:var(--gold);border-top:1px solid var(--border);background:#050505aa;line-height:1.7}
 .gear{display:inline-block;animation:rotate 5s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}
 button:disabled{opacity:.6;cursor:wait}
@@ -69,7 +71,7 @@ button:disabled{opacity:.6;cursor:wait}
   <h2>📝 LATEST POSTS</h2>
   <div id="publicPosts" class="card"><p class="small">Loading posts...</p></div>
 </section>
-<section>
+<section id="adminSection">
   <div id="adminLogin" class="card">
     <h2>🔐 ADMIN LOGIN</h2>
     <input type="email" id="adminEmail" placeholder="Admin Email" autocomplete="username">
