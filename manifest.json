@@ -1,0 +1,12 @@
+{
+  "id": "/akm-edits/",
+  "name": "AKM EDITS",
+  "short_name": "AKM EDITS",
+  "description": "AKM EDITS by Aslam Khan. Explore video edits, latest posts, and creative content.",
+  "start_url": "/akm-edits/",
+  "scope": "/akm-edits/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0b0b0b",
+  "background_color": "#0b0b0b"
+}
