@@ -225,5 +225,14 @@ try{
  else{supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);restoreSession()}
 }catch(error){console.error(error);publicArea.replaceChildren(makeElement("p","small","Could not initialise Supabase."))}
 </script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(
+      "/akm-edits/service-worker.js"
+    );
+  });
+}
+</script>
 </body>
 </html>
